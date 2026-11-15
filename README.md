@@ -226,15 +226,13 @@ The book text is included in the repository; the trained model is ignored by Git
 ### 07: Ask questions about photos
 
 [Notebook 07](07_Multimodal_Prompting/multimodal_prompting.ipynb) combines an image
-with a text prompt. Three photos in `07_Multimodal_Prompting/images/` show horses,
-a yawning dog and a sailing ship in Sète harbour. You can add JPG/JPEG, PNG
-or WEBP photos; convert HEIC first. The horse photo is public domain, the dog photo is CC0, and the harbour photo
-is CC BY 4.0 (Christian Ferrer; attribution required); [sources and rights](07_Multimodal_Prompting/images/README.md)
-are recorded per image. Original user-supplied photos are preserved locally in
-the ignored `images/user_supplied/` folder.
+with a text prompt. Three AI-generated course images in
+`07_Multimodal_Prompting/images/` show horses (`photo_001.jpg`), a dog with
+sunglasses in a bicycle basket (`photo_002.jpg`) and a London street intersection
+(`photo_003.jpg`). You can add JPG/JPEG, PNG or WEBP photos; convert HEIC first.
 
-Start by describing the dog photo (`photo_02.jpg`) with “Show what you see!”, then
-ask “How many dogs are visible in this image?” and a question of your own. Select another photo and adapt the object to
+Start with the horse photo (`photo_001.jpg`) and “Show what you see!”, then
+ask “How many horses are visible in this image?” and a question of your own. Select another photo and adapt the object to
 count. Compare each answer with the photo: a fluent description or a confident
 count can still be wrong. A full run sends three independent API requests with `gpt-6-luna`, the cheapest
 non-deprecated image-capable model by standard token rates, and requires the
@@ -269,7 +267,7 @@ llm_fundamentals/
 │   └── train_language_model.ipynb
 ├── 07_Multimodal_Prompting/  Text and image input
 │   ├── multimodal_prompting.ipynb
-│   └── images/              Three freely reusable course photos
+│   └── images/              Three AI-generated course images
 ├── 08_Example_Exam_Questions/ Mandatory offline exam, solutions, concept checks and synthetic CSVs
 ├── tests/                    Offline checks: notebook cells and the practice exam
 ├── data/                     Private Yelp data and local book/model files
