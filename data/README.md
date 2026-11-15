@@ -124,8 +124,8 @@ It never downloads source files.
 The optional notebook `06_Train_Language_Model` uses a separate data source:
 the English collection *Grimms' Fairy Tales*, including **Hansel and Gretel**,
 [Project Gutenberg eBook 2591](https://www.gutenberg.org/ebooks/2591).
-It downloads the complete UTF-8 file (including its source and licence notices)
-to `book_model/grimm_gutenberg_2591.txt`. Every tenth complete tale is held out
+It reads the supplied local UTF-8 file `book_model/grimm_gutenberg_2591.txt`
+(including its source and licence notices), without downloading book data. Every tenth complete tale is held out
 for validation;
 the preface, table of contents and Gutenberg notices are excluded.
 The notebook also writes `book_model/tiny_grimm.pt` with weights, tokenizer name,
@@ -134,8 +134,9 @@ configuration, source checksum, tale split and best-step metadata.
 The checkpoint contains the weights with the lowest measured validation loss.
 Tokens come from `tiktoken`
 (`cl100k_base`); only training token IDs enter the model vocabulary, with an
-unknown-token fallback for validation. Both files are ignored by Git and can be
-recreated by notebook 06; they are unrelated to the Yelp data and its terms below.
+unknown-token fallback for validation. The book text is included in Git; the model
+is ignored by Git and can be recreated by notebook 06. If the text is missing,
+restore it from the repository. These files are unrelated to the Yelp data and its terms below.
 
 The Yelp Open Dataset is licensed for non-commercial, academic use, and the data may not
 be displayed or distributed publicly (Yelp Dataset Terms of Use, section 4A). Use the data
