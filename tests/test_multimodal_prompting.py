@@ -3,6 +3,7 @@
 # Execute repository-owned cells with temporary photos and fake clients.
 # pylint: disable=exec-used
 
+import ast
 import base64
 import contextlib
 import io
@@ -30,7 +31,28 @@ class MultimodalTests(unittest.TestCase):
         """Send the image bytes with three independent questions."""
         notebook = nbformat.read(NOTEBOOK, as_version=4)
         nbformat.validate(notebook)
-        cells = [c.source for c in notebook.cells if c.cell_type == "code"]
+        # Override learner settings by assignment name, not default values.
+        # The fixture contains a dog regardless of the selected course photo.
+        settings = {"IMAGE_NAME": "a.PNG", "OBJECT_TO_COUNT": "dogs"}
+        overridden = set()
+        cells = []
+        for cell in notebook.cells:
+            if cell.cell_type != "code":
+                continue
+            tree = ast.parse(cell.source)
+            for node in tree.body:
+                if isinstance(node, ast.Assign):
+                    for target in node.targets:
+                        if (
+                            isinstance(target, ast.Name)
+                            and target.id in settings
+                        ):
+                            node.value = ast.copy_location(
+                                ast.Constant(settings[target.id]), node.value
+                            )
+                            overridden.add(target.id)
+            cells.append(compile(tree, str(NOTEBOOK), "exec"))
+        self.assertEqual(overridden, set(settings))
         for from_root in (True, False):
             with self.subTest(from_root=from_root):
                 create = Mock(
@@ -72,7 +94,7 @@ class MultimodalTests(unittest.TestCase):
                     folder = root / "07_Multimodal_Prompting"
                     images = folder / "images"
                     images.mkdir(parents=True)
-                    # The alphabetical choice accepts an uppercase extension.
+                    # Explicit selection accepts an uppercase extension.
                     (images / "a.PNG").write_bytes(PNG_BYTES)
                     (images / "b.jpg").write_bytes(b"not selected")
                     (images / "README.md").write_text("not an image")
@@ -86,14 +108,8 @@ class MultimodalTests(unittest.TestCase):
                             contextlib.redirect_stdout(io.StringIO()) as output,
                         ):
                             namespace = {}
-                            for source in cells:
-                                exec(
-                                    source.replace(
-                                        'IMAGE_NAME = "photo_02.jpg"',
-                                        'IMAGE_NAME = "a.PNG"',
-                                    ),
-                                    namespace,
-                                )
+                            for code in cells:
+                                exec(code, namespace)
                     finally:
                         os.chdir(previous)
                 calls = [call.kwargs for call in create.call_args_list]
