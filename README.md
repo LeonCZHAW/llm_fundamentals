@@ -115,7 +115,8 @@ Updating an existing course copy? Use the updated Moodle zip containing
 `mcdonalds_reviews.csv`, then rerun notebooks 01 and 03 in full. This regenerates the
 anonymized sample and silver labels with both chains for notebooks 04 and 05.
 
-Notebook 06 reads the supplied book text in `data/book_model/` without downloading it. Folder 08 already includes its synthetic exam CSVs.
+Notebook 06 reads the supplied book text in `data/book_model/` without downloading
+it. Folder 08 already includes its synthetic exam CSVs.
 
 Rules for the data:
 

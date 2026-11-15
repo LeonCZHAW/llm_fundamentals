@@ -3,8 +3,8 @@
 import ast
 import contextlib
 import copy
-import io
 import hashlib
+import io
 import json
 import math
 import re
@@ -88,7 +88,7 @@ class LanguageModelTests(unittest.TestCase):
             extract(document.replace("THE GOLDEN BIRD", "WRONG TITLE"))
 
     def test_book_loading_uses_local_text_without_network(self):
-        """Read a local collection and report missing input without downloads."""
+        """Read local books and report missing input without downloading."""
         notebook = json.loads(NOTEBOOK.read_text(encoding="utf-8"))
         source = next(
             "".join(cell["source"])
