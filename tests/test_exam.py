@@ -161,8 +161,17 @@ class ExamTests(unittest.TestCase):
             expected_cells = [
                 (c["id"], c["source"], c["metadata"]) for c in first["cells"]
             ]
+            # Execution timestamps vary when the saved notebook is run.
             saved_cells = [
-                (c["id"], "".join(c["source"]), c["metadata"])
+                (
+                    c["id"],
+                    "".join(c["source"]),
+                    {
+                        key: value
+                        for key, value in c["metadata"].items()
+                        if key != "execution"
+                    },
+                )
                 for c in saved["cells"]
             ]
             self.assertEqual(expected_cells, saved_cells)
