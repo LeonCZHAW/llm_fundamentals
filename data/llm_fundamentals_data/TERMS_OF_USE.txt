@@ -1,0 +1,8 @@
+Data for the course 'Data Science', Week 10: Working with LLMs (ZHAW SML)
+
+Subset of the Yelp Open Dataset (yelp.com/dataset), licensed for non-commercial,
+academic use. Use it only in this course. Do not upload it to GitHub or any other
+public place, and delete it after the semester.
+
+In your Codespace: drag this zip file onto the folder data/ and run
+    python -m zipfile -e data/llm_fundamentals_data.zip data

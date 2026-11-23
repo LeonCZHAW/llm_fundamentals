@@ -1,0 +1,30 @@
+[
+  {
+    "text": "This place is absolutely amazing and the staff is extremely helpful.",
+    "yelp_stars": 5,
+    "sentiment": "positive",
+    "aspects": [
+      {"aspect": "service", "polarity": "positive"}
+    ],
+    "note": "Straightforward positive example."
+  },
+  {
+    "text": "Swedish meatballs good. Attitude at.Return/Exchange counter bad.",
+    "yelp_stars": 1,
+    "sentiment": "mixed",
+    "aspects": [
+      {"aspect": "restaurant", "polarity": "positive"},
+      {"aspect": "service", "polarity": "negative"}
+    ],
+    "note": "Mixed aspects; original spelling kept."
+  },
+  {
+    "text": "I like IKEA because they are always having a 50% off sale; it's called Craig's List.",
+    "yelp_stars": 3,
+    "sentiment": "negative",
+    "aspects": [
+      {"aspect": "price", "polarity": "negative"}
+    ],
+    "note": "Ironic: the literal words are positive."
+  }
+]
